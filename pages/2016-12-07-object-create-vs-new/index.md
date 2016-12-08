@@ -75,8 +75,12 @@ Can you spot the difference now?
 Yes! The difference is that when we use `Object.create` method for creating an object
 it sets its prototype to `Foo.prototype`. But the `Foo` constructor function is not called at all.
 
+We can use it when we want to create a new object with a prototype set to some other object
+but without calling its constructor function. It may be very handy when we want to implement inheritance.
+
+But let's do a simple example.
+
 ## Example
-Let's do a little experiment.
 
 First let's recreate our `Foo` constructor function.
 And add some variable to it.
@@ -112,6 +116,7 @@ baz.greeting();  // prints `I want to say: undefined`
 ````
 
 As you can see `greeting` method is available for both `bar` and `baz` objects.
-But when we call `baz.greeting()` we get **I want to say: undefined** printed to the console.
-This is because when we created `baz` object we did't call its `Foo` constructor function where the `greet` variable is declared.
+But when we call `baz.greeting()` we get "I want to say: undefined" printed to the console.
+
+This is because when we created `baz` object we **did't** call its `Foo` constructor function where the `greet` variable was declared.
 So `greet` varaible inside `baz.greeting` method remains undefined.
