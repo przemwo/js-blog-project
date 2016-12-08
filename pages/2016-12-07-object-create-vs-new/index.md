@@ -5,8 +5,48 @@ layout: post
 path: "/what-the-difference-between-object-create-and-new-keyword/"
 ---
 
-Let's start from understanding what `Object.create` method does.
-In order to do so let's see how basic `Object.create` polyfill looks like:
+Take a look at this code:
+
+````javascript
+const Foo = function() {}
+
+const bar = new Foo();
+
+const baz = Object.create(Foo.prototype);
+````
+
+We can use both `Object.create` and `new` keyword to create new objects and sets its prototypes to some other object's prototype
+(to `Foo.prototype` here).
+So what's the difference between them?
+
+Let's start by seeing what's happening when we create a new object using `new` keyword.
+
+## Create an object by using new keyword
+
+First let's make a constructor function and name it `Foo`:
+
+````javascript
+const Foo = function() {};
+````
+
+This function will be used to create a new object.
+So let's create a new object and name it `bar`:
+
+````javascript
+const bar = new Foo();
+````
+
+What's happening when the code `new Foo()` is executed?
+
+1. The code above creates and return a new object and assign it to the `bar` variable.
+2. Prototype of this newly created object is set to the `Foo.prototype` (`bar.__proto__ === Foo.prototype`).
+3. The constructor function (`Foo`) is called.
+
+
+## Create an object by using Object.create
+
+Now let's see what `Object.create` method does.
+In order to do so let's create an `Object.create` polyfill first:
 
 ````javascript
 if(!Object.create) {
@@ -19,63 +59,59 @@ if(!Object.create) {
 ````
 As you can see `Object.create` returns an instance of an **empty object** (F constructor has no properties) with its prototype set to an object passed as an argument.
 
-We can use it to create a new object with a prototype set to some other object.
-So why not just use `new` keyword instead?
-What's the difference between creating an object by calling `Object.create` and using `new` keyword?
-
-# TODO: Example!!!
-
-Let's say we have `Foo` constructor function like this:
+Now let's create a new object by calling `Object.create` method:
 
 ````javascript
-// Foo constructor
-const Foo = function() {};
+const baz = Object.create(Foo.prototype);
 ````
 
-We add `greeting` method to Foo prototype:
+What's happening here?
+
+1. The code above creates and return a new object and assign it to the `baz` variable.
+2. Prototype of this newly created object is set to the `Foo.prototype` (`bar.__proto__ === Foo.prototype`).
+
+Can you spot the difference now?
+
+Yes! The difference is that when we use `Object.create` method for creating an object
+it sets its prototype to `Foo.prototype`. But the `Foo` constructor function is not called at all.
+
+## Example
+Let's do a little experiment.
+
+First let's recreate our `Foo` constructor function.
+And add some variable to it.
 
 ````javascript
-//Adding greeting method to Foo prototype
+const Foo = function() {
+  this.greet = 'Hello world!';
+}
+````
+
+We add `greeting` method to `Foo` prototype which prints the value of the `greet` variable:
+
+````javascript
 Foo.prototype.greeting = function() {
-  console.log('Hi there!')
+  console.log('I want to say: ' + this.greet);
 };
-
-//Creating bar object using Object.create
-//and setting its prototype to Foo prototype
-const bar = Object.create(Foo.prototype);
-
-//Creating baz object using new keyword
-const baz = new Foo();
 ````
 
-The difference is that when we use `Object.create` method for creating an object it only uses the `Foo` prototype without calling the `Foo` constructor function.
+Next create new objects as before:
 
-It may be very handy when we want to implement inheritance.
+````javascript
+const bar = new Foo();
 
+const baz = Object.create(Foo.prototype);
+````
 
-I don't know about you but I've noticed that whenever
-I want to learn something new in programming, taking a look what's going on behind the scenes helps me a lot.
+What would happen when we try to call `greeting` methods on these newly created objects?
 
+````javascript
+bar.greeting();  // prints 'I want to say: Hello world!'
 
+baz.greeting();  // prints `I want to say: undefined`
+````
 
-*   This however showed weasel
-*   Well uncritical so misled
-    *   this is very interesting
-*   Goodness much until that fluid owl
-
-When she reached the first hills of the **Italic Mountains**, she
-had a last view back on the skyline of her
-hometown _Bookmarksgrove_, the headline of [Alphabet
-Village](http://google.com) and the subline of her own road, the
-Line Lane. Pityful a rethoric question ran over her cheek, then she
-continued her way. On her way she met a copy.
-
-> Far far away, behind the word mountains, far from the countries
-> Vokalia and Consonantia, there live the blind texts. Separated
-> they live in Bookmarksgrove right at the coast of the Semantics, a
-> large language ocean. 
-
-1.  So baboon this
-2.  Mounted militant weasel gregariously admonishingly straightly hey
-3.  Dear foresaw hungry and much some overhung
-4.  Rash opossum less because less some amid besides yikes jeepers frenetic impassive fruitlessly shut
+As you can see `greeting` method is available for both `bar` and `baz` objects.
+But when we call `baz.greeting()` we get **I want to say: undefined** printed to the console.
+This is because when we created `baz` object we did't call its `Foo` constructor function where the `greet` variable is declared.
+So `greet` varaible inside `baz.greeting` method remains undefined.
