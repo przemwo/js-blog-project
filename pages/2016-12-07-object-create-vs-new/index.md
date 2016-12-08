@@ -118,5 +118,5 @@ baz.greeting();  // prints `I want to say: undefined`
 As you can see `greeting` method is available for both `bar` and `baz` objects.
 But when we call `baz.greeting()` we get "I want to say: undefined" printed to the console.
 
-This is because when we created `baz` object we **did't** call its `Foo` constructor function where the `greet` variable was declared.
+This is because when we created `baz` object we **did't** call `Foo` constructor function where the `greet` variable was declared.
 So `greet` varaible inside `baz.greeting` method remains undefined.
