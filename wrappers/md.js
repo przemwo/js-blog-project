@@ -20,21 +20,25 @@ class MarkdownWrapper extends React.Component {
         />
         <h1 style={{marginTop: 0}}>{post.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.body }} />
-        <em
-          style={{
-            display: 'block',
-            marginBottom: rhythm(2),
-          }}
-        >
-          Posted {moment(post.date).format('MMMM D, YYYY')}
-        </em>
-        <hr
-          style={{
-            marginBottom: rhythm(2),
-          }}
-        />
-        <ReadNext post={post} pages={route.pages} />
-        <Bio />
+        {(route.page.data.title !== "About me") &&
+          <div>
+            <em
+              style={{
+                display: 'block',
+                marginBottom: rhythm(2),
+              }}
+              >
+              Posted {moment(post.date).format('MMMM D, YYYY')}
+            </em>
+            <hr
+              style={{
+                marginBottom: rhythm(2),
+              }}
+            />
+            <ReadNext post={post} pages={route.pages} />
+            <Bio />
+          </div>
+        }
       </div>
     )
   }

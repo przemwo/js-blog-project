@@ -11,24 +11,40 @@ class Template extends React.Component {
     let header
     if (location.pathname === prefixLink('/')) {
       header = (
-        <h1
-          style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
-          }}
-        >
-          <Link
+        <div>
+          <h1
             style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
+              ...scale(1.5),
+              marginBottom: rhythm(1.5),
+              marginTop: 0,
+              marginBottom: 0
             }}
-            to={prefixLink('/')}
-          >
-            {config.blogTitle}
-          </Link>
-        </h1>
+            >
+            <Link
+              style={{
+                boxShadow: 'none',
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+              to={prefixLink('/')}
+              >
+              {config.blogTitle}
+            </Link>
+          </h1>
+          <h3
+            style={{
+              ...scale(-0.2),
+              marginTop: rhythm(0.5),
+              marginBottom: rhythm(0.5),
+            }}>
+            Some notes about Javascript and frontend development that I wanted to have close at hand...
+          </h3>
+          <hr
+            style={{
+              marginBottom: rhythm(2),
+            }}
+          />
+        </div>
       )
     } else {
       header = (

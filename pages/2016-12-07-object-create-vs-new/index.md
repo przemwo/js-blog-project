@@ -3,6 +3,7 @@ title: What's the difference between Object.create and new keyword?
 date: "2016-12-07T22:40:32.169Z"
 layout: post
 path: "/what-the-difference-between-object-create-and-new-keyword/"
+readNext: ""
 ---
 
 Take a look at this code:
@@ -118,5 +119,5 @@ baz.greeting();  // prints `I want to say: undefined`
 As you can see `greeting` method is available for both `bar` and `baz` objects.
 But when we call `baz.greeting()` we get "I want to say: undefined" printed to the console.
 
-This is because when we created `baz` object we **did't** call `Foo` constructor function where the `greet` variable was declared.
+This is because when we created `baz` object we **didn't** call `Foo` constructor function where the `greet` variable was declared.
 So `greet` varaible inside `baz.greeting` method remains undefined.
