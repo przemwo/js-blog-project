@@ -20,7 +20,7 @@ class MarkdownWrapper extends React.Component {
         />
         <h1 style={{marginTop: 0}}>{post.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.body }} />
-        {(route.page.data.title !== "About me") &&
+        {(route.page.data.title !== "About me and this blog") &&
           <div>
             <em
               style={{
