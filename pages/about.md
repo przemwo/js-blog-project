@@ -7,10 +7,10 @@ path: /about/
 
 Hi! My name is Przemek Wolnik and I&apos;m a frontend developer who lives and works in Gdańsk, Poland.
 
-Why I wrote this blog? I wanted it to be:
+Why I've made this blog? I thought it would be:
 
 1. A set of notes about topics that I thought were worth to learn. Notes that are always close at hand whenever I need them.
-2. A good (I think) way to learn new things.
+2. A good way to learn new things.
 3. A record of my learning of Javascript and technologies related with programming.
 
 Because of the above it would be fair to warn you that in the articles on this blog you may find many simplifications,

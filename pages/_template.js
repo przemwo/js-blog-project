@@ -37,7 +37,7 @@ class Template extends React.Component {
               marginTop: rhythm(0.5),
               marginBottom: rhythm(0.5),
             }}>
-            Javascript and frontend development notes that I wanted to have close at hand...
+            Javascript and frontend development notes that I want to have close at hand...
           </h3>
           <hr
             style={{

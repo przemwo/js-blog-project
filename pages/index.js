@@ -43,16 +43,16 @@ class BlogIndex extends React.Component {
             {"name": "keywords", "content": "blog, articles"},
           ]}
         />
-        <Introduction />
+        <ul>
+          {pageLinks}
+        </ul>
         <hr
           style={{
             marginTop: rhythm(2),
             marginBottom: rhythm(1),
           }}
         />
-        <ul>
-          {pageLinks}
-        </ul>
+        <Introduction />
       </div>
     )
   }

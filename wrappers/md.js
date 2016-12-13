@@ -5,6 +5,7 @@ import ReadNext from '../components/ReadNext'
 import { rhythm } from 'utils/typography'
 import { config } from 'config'
 import Bio from 'components/Bio'
+import Links from 'components/Links';
 
 import '../css/zenburn.css'
 
@@ -12,6 +13,7 @@ class MarkdownWrapper extends React.Component {
   render () {
     const { route } = this.props
     const post = route.page.data
+    const links = post.links;
 
     return (
       <div className="markdown">
@@ -25,11 +27,12 @@ class MarkdownWrapper extends React.Component {
             <em
               style={{
                 display: 'block',
-                marginBottom: rhythm(2),
+                marginBottom: rhythm(1),
               }}
               >
               Posted {moment(post.date).format('MMMM D, YYYY')}
             </em>
+            {links.length > 0 && <Links links={links} />}
             <hr
               style={{
                 marginBottom: rhythm(2),
