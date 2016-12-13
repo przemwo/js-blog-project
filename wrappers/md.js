@@ -32,7 +32,7 @@ class MarkdownWrapper extends React.Component {
               >
               Posted {moment(post.date).format('MMMM D, YYYY')}
             </em>
-            {links.length > 0 && <Links links={links} />}
+            {links && links.length > 0 && <Links links={links} />}
             <hr
               style={{
                 marginBottom: rhythm(2),

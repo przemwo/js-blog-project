@@ -14,7 +14,6 @@ class BlogIndex extends React.Component {
   render () {
     const pageLinks = []
     // Sort pages.
-    console.log(this.props.route.pages);
     const sortedPages = sortBy(this.props.route.pages, (page) =>
       access(page, 'data.date')
     ).reverse()
@@ -39,8 +38,8 @@ class BlogIndex extends React.Component {
         <Helmet
           title={config.blogTitle}
           meta={[
-            {"name": "description", "content": "Sample blog"},
-            {"name": "keywords", "content": "blog, articles"},
+            {"name": "description", "content": "Javascript and frontend notes that I want to have close at hand."},
+            {"name": "keywords", "content": "javascript, frontend"},
           ]}
         />
         <ul>

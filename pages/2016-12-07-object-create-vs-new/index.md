@@ -5,7 +5,7 @@ layout: post
 path: "/what-the-difference-between-object-create-and-new-keyword/"
 readNext: ""
 links:
-  - "Object.Create - Object Creation in JavaScript by FunFunFunction||https://www.youtube.com/watch?v=CDFN1VatiJA"
+  - "Object.Create - Object Creation in JavaScript by FunFunFunction||https://youtu.be/CDFN1VatiJA"
   - "Object.Create on MDN||https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/create"
   - "Object.create(): the New Way to Create Objects in JavaScript||http://www.htmlgoodies.com/beyond/javascript/object.create-the-new-way-to-create-objects-in-javascript.html"
   - "JavaScript inheritance: Object.create vs new on stackoverflow||http://stackoverflow.com/a/13041474"
