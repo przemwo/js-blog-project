@@ -33,6 +33,7 @@ class MarkdownWrapper extends React.Component {
               Posted {moment(post.date).format('MMMM D, YYYY')}
             </em>
             {links && links.length > 0 && <Links links={links} />}
+            <p>Found a mistake? Please let me know and <a href="mailto:przemwo@o2.pl">email me</a>. Thanks!</p>
             <hr
               style={{
                 marginBottom: rhythm(2),

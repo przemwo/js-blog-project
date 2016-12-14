@@ -12,7 +12,7 @@ const Links = ({links}) => {
       style={{
         marginTop: rhythm(2),
       }}>
-        You might also be interested in these:
+        Further Reading:
       </h3>
       <ul>
         {links.map((link, index) => <Link key={index} link={link} />)}
