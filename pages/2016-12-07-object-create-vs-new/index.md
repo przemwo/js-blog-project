@@ -14,20 +14,20 @@ links:
 Take a look at this code:
 
 ````javascript
-const Foo = function() {}
+const Foo = function() {};
 
 const bar = new Foo();
 
 const baz = Object.create(Foo.prototype);
 ````
 
-We can use both `Object.create` and `new` keyword to create new objects and sets its prototypes to some other object's prototype
+We can use both `Object.create` and `new` keyword to create new objects and set their prototypes to some other object's prototype
 (to `Foo.prototype` here).
 So what's the difference between them?
 
 Let's start by seeing what's happening when we create a new object using `new` keyword.
 
-## Create an object by using new keyword
+## Creating an object by using new keyword
 
 First let's make a constructor function and name it `Foo`:
 
@@ -49,7 +49,7 @@ What's happening when the code `new Foo()` is executed?
 3. The constructor function (`Foo`) is called.
 
 
-## Create an object by using Object.create
+## Creating an object by using Object.create
 
 Now let's see what `Object.create` method does.
 In order to do so let's create an `Object.create` polyfill first:
@@ -63,7 +63,7 @@ if(!Object.create) {
     };
 }
 ````
-As you can see `Object.create` returns an instance of an **empty object** (F constructor has no properties) with its prototype set to an object passed as an argument.
+As you can see `Object.create` returns an instance of an **empty object** (F constructor has no properties) with its prototype set to an object passed as an argument (**o**).
 
 Now let's create a new object by calling `Object.create` method:
 
@@ -74,7 +74,7 @@ const baz = Object.create(Foo.prototype);
 What's happening here?
 
 1. The code above creates and return a new object and assign it to the `baz` variable.
-2. Prototype of this newly created object is set to the `Foo.prototype` (`bar.__proto__ === Foo.prototype`).
+2. Prototype of this newly created object is set to the `Foo.prototype` (`baz.__proto__ === Foo.prototype`).
 
 Can you spot the difference now?
 
@@ -89,7 +89,7 @@ But let's do a simple example.
 ## Example
 
 First let's recreate our `Foo` constructor function.
-And add some variable to it.
+And add some variable to it:
 
 ````javascript
 const Foo = function() {
