@@ -15,3 +15,5 @@ links:
 **arity** - the number of parameters in a function declaration. Number of parameters that function expects.
 **unary function** - a function with arity of 1.
 **closure** - when a function remembers and access variables from outside of its own scope, even when that function is executed in a different scope.
+**partial application** - is a reduction in a function's arity
+**currying** - when a function that expects **multiple** arguments is broken down into successive chained functions that take a **single** argument and return **another function** to accept the **next argument**.
