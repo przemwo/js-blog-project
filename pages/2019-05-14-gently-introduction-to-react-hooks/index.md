@@ -202,7 +202,7 @@ const MyComponent = () => {
 }
 ````
 
-W ten sposób mamy w pełni działający komponent funkcyjny, który korzysta ze stanu.
+W ten sposób stworzyliśmy w pełni działający komponent funkcyjny, który korzysta ze stanu.
 
 ## No fajnie, działa ale gdzie te obiecane cuda?
 
