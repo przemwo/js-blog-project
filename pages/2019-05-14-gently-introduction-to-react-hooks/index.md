@@ -1,25 +1,25 @@
 ---
-title: Gently introduction to React Hooks
+title: Gently introduction to React Hooks. Part 1.
 date: "2019-05-14T21:45:00.169Z"
 layout: post
-path: "/gently-introduction-to-react-hooks/"
+path: "/gently-introduction-to-react-hooks-part-1/"
 readNext: ""
 links: ""
 ---
 
-# Łagodne wprowadzenie do React Hooks
+# Łagodne wprowadzenie do React Hooks. Część 1.
 
-W tym artykule odpowiem na następujące pytania:
+W tej serii artykułów odpowiem na następujące pytania:
 - Co to są React Hooks?
 - Po co są React Hooks?
 - Jak używać React Hooks?
 - Czy warto znać React Hooks?
 
-W dalszej części artykułu zakładam, że masz podstawową wiedzę na temat React (każdy tutorial trwający więcej niż 5 minut wystarczy) i nie masz żadnej wiedzy na temat React Hooks.
+W dalszej części zakładam, że masz podstawową wiedzę na temat React (każdy tutorial trwający więcej niż 5 minut wystarczy) i nie masz żadnej wiedzy na temat React Hooks.
 
 ## Moja historia
 
-Pracuję na co dzień z React od przeszło dwóch lat. Muszę przyznać, że Jak dotąd były to dwa bardzo przyjemne lata. Kiedy jednak po raz pierwszy usłyszałem o React Hooks...  **STOP**! Bądźmy szczerzy: nikogo nie interesuje moja historia! Nie ma powodu, aby zainteresowała i Ciebie. Przejdźmy więc do React Hooks!
+Pracuję na co dzień z React od przeszło dwóch lat. Muszę przyznać, że Jak dotąd były to dwa bardzo przyjemne lata. Kiedy jednak po raz pierwszy usłyszałem o React Hooks byłem bardzo sceptyczny: "Po co zmieniać coś co jest dobre i działa?" Kiedy zobaczyłem pierwsze przykłady z hookami poczucie "to nie jest dobry kierunek" się wzmogło. Jednak hooki atakowały z każdej strony i kolejne osoby zachwycały się nowym dodatkiem do React. Postanowiłem dać im szansę... i dołączyłem do grona zachwyconych. Ale po kolei.
 
 ## Co to są React Hooks?
 
@@ -34,7 +34,7 @@ Generalnie są dwa* sposoby na tworzenie komponentów w React:
 2. Za pomocą funkcji (komponenty funkcyjne / function components)
 
 Używanie funkcji do tworzenia komponentów wydaje się prostsze:
-- Nie trzeba “walczyć” ze słowem kluczowym this i pamiętać o bindowaniu metod,
+- Nie trzeba “walczyć” ze słowem kluczowym `this` i pamiętać o bindowaniu metod,
 - Komponenty funkcyjne są czytelniejsze i szybciej się je pisze,
 - Łatwiej się je testuje i wnioskuje co dzieje się wewnątrz.
 
@@ -55,7 +55,7 @@ Np. komponent tworzący przycisk może pamiętać czy użytkownik już go wcisn�
 **Co to są metody cyklu życia komponentu?**
 Cykl życia komponentu to czas od momentu namalowania go w przeglądarce (a nawet chwilę przed tym), tak że użytkownik go widzi i może z niego korzystać aż do czasu jego usunięcia (komponent znika z oczu użytkownika). Metody cyklu życia pozwalają na wykonanie dowolnego kodu w kluczowych momentach “życia” komponentu.
 
-Np. chcemy znać wysokość jaką ma wyrenderowany przez nasz komponent przycisk. Ta wiedza jest dostępna dopiero po faktycznym namalowaniu przycisku w przeglądarce. Dzięki metodzie componentDidMount mamy możliwość zmierzyć wysokość przycisku w momencie gdy ten będzie już wyrenderowany.
+Np. chcemy znać wysokość jaką ma wyrenderowany przez nasz komponent przycisk. Ta wiedza jest dostępna dopiero po faktycznym namalowaniu przycisku w przeglądarce. Dzięki metodzie `componentDidMount` mamy możliwość zmierzyć wysokość przycisku w momencie gdy ten będzie już wyrenderowany.
 
 Komponenty napisane za pomocą funkcji nie dawały nam tych możliwości. Napisałem w czasie przeszłym bo… od wersji React 16.8 obie te funkcjonalności są już dostępne w komponentach funkcyjnych dzięki React Hooks!
 
@@ -97,7 +97,7 @@ Stwórzmy komponentu funkcyjny, który robi to samo. Zacznijmy od przekopiowania
 2. Faktycznie interesuje nas nie `state.userName` a samo `userName`. Słowo `state` również znika.
 3. Nie definiujemy `state`. Deklarujemy za to zmienną `userName` i przypisujemy jej wartość `"Bob"`.
 4. Zmieniamy `setState` na funkcję `setUserName`.
-5. Dodajmy `const` przed `handleUserNameChanged` jako, że teraz będzie to zmienna lokalna.
+5. Dodajemy `const` przed `handleUserNameChanged` jako, że teraz będzie to zmienna lokalna.
 
 ````jsx
 import React from 'react';
@@ -122,8 +122,8 @@ const MyComponent = () => {
 }
 ````
 
-Na tym etapie nasz komponent nie działa. Nie zna `setUserName`.
-Zastanówmy się zatem czym jest (czym powinno być) `setUserName`. Ma to być **funkcja** zmieniająca wartość zmiennej `userName`. Dodajmy więc naszą naiwną implementację tej funkcji.
+Na tym etapie nasz komponent nie działa. Nie wie czym jest `setUserName`.
+Zastanówmy się zatem czym jest (a właściwie czym powinno być) `setUserName`. Ma to być **funkcja** zmieniająca wartość zmiennej `userName`. Dodajmy więc naszą naiwną implementację tej funkcji.
 
 ````jsx
 import React from 'react';
@@ -158,13 +158,15 @@ Nasz komponent prawie działa. Prawie bo wyświetla input oraz imię użytkownik
    
 `useState` może przyjąć jako argument dowolną wartość początkową jaką chcemy przypisać do stanu. Może to być `string`, `boolean`, `tablica` czy `obiekt`.
 
+Zapiszmy zatem:
+
 ````javascript
 const state = useState("Bob");
 const userName = state[0];
 const setUserName = state[1];
 ````
 
-Dzięki `destructuring` tablicy możemy ten kod uprościć:
+Dzięki `destructuring` tablicy możemy ten kod jeszcze uprościć:
 
 ````javascript
 const [userName, setUserName] = useState("Bob");
@@ -206,6 +208,6 @@ W ten sposób mamy w pełni działający komponent funkcyjny, który korzysta ze
 
 W tym momencie możesz sobie pomyśleć, że wprowadzenie hooksów nie daje specjalnej wartośći dodanej do tego co mieliśmy wcześniej. I faktycznie jak porównasz kod z komponentu klasowego i finalny z funkcyjnego różnic nie ma zbyt wiele i ciężo dostrzec czym ludzie się tak zachwycają.
 
-Obiecuję jednak, że jeśli zostaniesz ze mną do końca tej serii będziesz miał moment **Wow! To jest super!**. No ja w każdym razie tak miałem.
+Obiecuję jednak, że jeśli zostaniesz ze mną do końca tej serii będziesz miał moment **Wow! To jednak jest super!** No ja w każdym razie tak miałem.
 
 Do zobaczenia w kolejnym odcinku łagodnego wprowadzenia do React Hooks!
