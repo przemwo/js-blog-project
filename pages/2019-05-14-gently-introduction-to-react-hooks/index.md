@@ -63,7 +63,7 @@ Komponenty napisane za pomocą funkcji nie dawały nam tych możliwości. Napisa
 
 Naszą przygodę z React Hooks zacznijmy od przepisania prostego komponentu klasowego na funkcyjny.
 
-Poniżej mamy komponent, który renderuje pole input. Użytkownik może wpisać w nim swoje imię, które będzie wyświetlone powyżej:
+Poniżej mamy komponent, który renderuje pole input. Użytkownik może wpisać w nim swoje imię, które będzie zapisane w stanie i zostanie wyświetlone powyżej inputa:
 
 ````jsx
 import React from 'react';
