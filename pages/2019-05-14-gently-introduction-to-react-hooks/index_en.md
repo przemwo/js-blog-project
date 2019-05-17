@@ -11,7 +11,7 @@ From now on I assume that:
 
 ## My story
 
-I've been working with React for over two years now. I must admit it's been very nice two years. So I was very sceptical when I heard about React hooks for the first time. "Why change something that is good and works?" When I saw first hooks examples my feeling "this is not a good direction" was even stronger. But hooks kept attacking me from every direction and more and more people seemed to be delighted with the new React addition. I decided to give them a try... and I joined a circle of delighted.
+I've been working with React for over two years now. I must admit it's been very nice two years. So I was very sceptical when I heard about React hooks for the first time. "Why change something that is good and works?" When I saw first hooks examples my feeling "this is not a good direction" was even stronger. But hooks kept attacking me from every direction and more and more people seemed to be delighted with the new React addition. I decided to give them a try... and I joined a circle of delighted. But first things first.
 
 ## What are React Hooks?
 
