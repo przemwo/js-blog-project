@@ -30,7 +30,7 @@ Ale ale! może zakrzyknąć ktoś. Przecież od dawna mogliśmy tworzyć kompone
 
 ## W jaki sposób tworzymy komponenty w React?
 
-Generalnie są dwa* sposoby na tworzenie komponentów w React:
+Co do zasady są dwa sposoby na tworzenie komponentów w React:
 1. Za pomocą klas (komponenty klasowe / class components)
 2. Za pomocą funkcji (komponenty funkcyjne / function components)
 
@@ -44,6 +44,7 @@ Powstaje zatem kolejne pytanie...
 ## Dlaczego są dwa sposoby na tworzenie komponentów w React?
 
 Skoro komponenty funkcyjne są takie “fajne” dlaczego nie używamy wyłącznie nich? Po co w ogóle używać klas?
+
 Komponenty napisane za pomocą klas mają dwie ważne cechy (funkcjonalności) jakich nie mają te napisane za pomocą funkcji:
 1. Posiadają **stan** (state),
 2. Dają dostęp do **metod cyklu życia** (lifecycle methods) komponentu. 
@@ -62,7 +63,7 @@ Komponenty napisane za pomocą funkcji nie dawały nam tych możliwości. Napisa
 
 ## Pokaż mi kod!
 
-Naszą przygodę z React Hooks zacznijmy napisania prostego komponentu klasowego.
+Naszą przygodę z React Hooks zacznijmy od napisania prostego komponentu klasowego.
 
 Poniżej mamy komponent, który renderuje pole input. Użytkownik może wpisać w nim swoje imię, które będzie zapisane w stanie i zostanie wyświetlone powyżej inputa:
 
@@ -98,16 +99,17 @@ Napiszmy teraz komponentu funkcyjny, który robi dokładnie to samo. Zacznijmy o
 ````jsx
 import React from 'react';
 
-const MyComponent = () => {};
+const MyComponent = () => {
+};
 ````
 
 Następnie przekopiujmy kluczowe elementy kodu z komponentu klasowego:
-1. Kopiujemy kod zwracany przez metodę `render()`, który będzie bezpośrednio zwracany przez nasz komponent funkcyjny.
-2. Kopiujemy `handleUserNameChanged()` i wstawiamy słowo kluczowe `const` przed nazwą funkcji.
+1. Kopiujemy kod zwracany przez metodę `render`, który będzie bezpośrednio zwracany przez nasz komponent funkcyjny.
+2. Kopiujemy `handleUserNameChanged` i wstawiamy słowo kluczowe `const` przed nazwą funkcji.
 3. W komponencie funkcyjnym nie ma słowa kluczowego `this`. Usuwamy wszystkie jego wystąpienia.
 4. Faktycznie interesuje nas nie `state.userName` a samo `userName`. Wszystkie wystąpienia `state` również usuwamy.
 5. Nie definiujemy `state` jako obiektu. Deklarujemy za to zmienną `userName` i przypisujemy jej wartość początkową `"Bob"`.
-6. Zmieniamy `setState` na funkcję o bardziej opisowej nazwie: `setUserName`. Funkcja ta będzie odpowiedzialna za zmianę wartości zmiennej `userName`.
+6. Zmieniamy `setState` na funkcję o bardziej opisowej nazwie: `setUserName` i przekazujemy jej jedynie wartość otrzymaną z inputa. Funkcja ta będzie odpowiedzialna za zmianę wartości zmiennej `userName`.
 
 Po zmianach nasz komponent wygląda następująco:
 
@@ -228,7 +230,7 @@ W tym momencie nasz komponent powinien działać dokładnie tak samo jak nasz po
 
 ## No fajnie, działa ale gdzie te obiecane cuda?
 
-W tym momencie możesz sobie pomyśleć, że wprowadzenie hooksów nie daje specjalnej wartośći dodanej do tego co mieliśmy wcześniej. I faktycznie jak porównasz kod z komponentu klasowego i finalny z funkcyjnego różnic nie ma zbyt wiele i ciężo dostrzec czym ludzie się tak zachwycają.
+W tym momencie możesz sobie pomyśleć, że wprowadzenie hooksów nie daje specjalnej wartośći dodanej do tego co mieliśmy wcześniej. I faktycznie jak porównasz kod z komponentu klasowego i finalny z funkcyjnego różnic nie ma zbyt wiele i ciężko dostrzec czym ludzie się tak zachwycają.
 
 Obiecuję jednak, że jeśli zostaniesz ze mną do końca tej serii będziesz miał moment **Wow! To jednak jest super!** No ja w każdym razie tak miałem.
 
