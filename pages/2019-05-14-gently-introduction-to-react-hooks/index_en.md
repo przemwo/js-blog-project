@@ -44,17 +44,17 @@ Class components have two important features not available for function componen
 
 E.g. a button component can remember whether user clicked it or not. And depending on that render itself in green or red.
 
-**What are component's lifecycle methods?** Component's lifecycle is the time since painting it in the browser (and even a moment before) up unitl removing it from there. Lifecycle methods let us execute any code in key moments of component's existance.
+**What are component's lifecycle methods?** Component's lifecycle is a period starting with the first painting of a component in a browser (and even one moment before) up unitl removing it from there. Lifecycle methods let us execute any code in key moments of component's existance.
 
-E.g. we'd like to know the height of the button. This information is avilable after the button is actually rendered in the browser.Thanks to `componentDidMount` we can have access to the button and get its height when it's rendred.
+E.g. let’s say we'd like to know the height of the button. This information is available after the button is actually rendered in the browser.Thanks to `componentDidMount` we can have access to the button and get its height when it's rendered.
 
-We didn't have access to these features while using function components. I used past tense becasue since React 16.8 thanks to React hooks both of these are available to function components!
+We couldn’t have used these features while using function components in the past. But since React 16.8 - thanks to introduction of React hooks - both state and lifecycle methods  are available to function components!
 
 ## Show me some code!
 
-Let's begin our adventure with React hooks from writing some simple class component.
+Let's begin our adventure with React hooks from writing asimple class component.
 
-We have simple component that renderes input field. The user can enter his/her name and it'll be saved in component state and displayed above the input field.
+We have a simple component that renders input field. The user can enter their name and it'll be saved in component state and displayed above the input field.
 
 ````jsx
 import React from 'react';
@@ -83,7 +83,7 @@ class MyComponent extends React.Component {
 }
 ````
 
-Let's write a function component now. The goal is to write a component that has exactly the same functionality as the class component. Let's start with empty arrow function:
+Let's write a function component now. The goal is to write a component that has exactly the same functionality as the class component. Let's start with an empty arrow function:
 
 ````jsx
 import React from 'react';
@@ -94,7 +94,7 @@ const MyComponent = () => {
 
 And then do the following:
 1. Copy the code returned by `render()` method. It'll be returned directly by our function component.
-2. Copy `handleUserNameChanged` method and add `const` keyword in front.
+2. Copy `handleUserNameChanged` method and add `const` keyword in front of it.
 3. We don't have `this` keyword in function component. Delete all its occurrences.
 4. We are interested in `userName` not `state.userName`. Remove all `state.` from the code.
 5. We don't define `state` as an object. We define `userName` variable instead and give it a string `"Bob"` as initial value.
@@ -158,13 +158,13 @@ const MyComponent = () => {
 }
 ````
 
-Our code almost works. Almost because it shows input field and user name as "Bob". But we can't change that user name. Why? We are lacking the component **state** in which we could keep our new user name. We'd like to **use state* here. Luckily for us React gives us a `useState` hook.
+Our code almost works. Almost because it shows input field and user name as "Bob". But we can't change that user name. Why? We are lacking the component’s **state** in which we could keep our new user name. We'd like to **use state* here. Luckily for us React gives us a `useState` hook.
 
 ## useState hook
 
 `useState` is a hook that let us use state in a function component.
 
-`useState` is a function that returns array with two elements:
+`useState` hook is a function that returns array with two elements:
 1. First element is a variable to store a value of our state.
 2. Second element is a function we can use to change the state with a new value.
 
@@ -185,11 +185,11 @@ const [userName, setUserName] = useState("Bob");
 ````
 
 We can read this as follows:
-1. We want to use state and keep its value i a **variable** called `userName`.
+1. We want to use state and keep its value in a **variable** called `userName`.
 2. We can change the state by calling `setUserName` **function*** with a new value.
 3. We set initial `userName` value to `"Bob"`.
 
-With this knowledge let's get back to our example. Import `useState` from 'react` and use it in the component.
+With this knowledge at hand let's get back to our example. Import `useState` from 'react` and use it in the component.
 
 ````jsx
 import React, { useState } from 'react';
@@ -214,12 +214,12 @@ const MyComponent = () => {
 }
 ````
 
-At this moment our function component should work exactly the same as our class component. Thanks to React `useState` hook we've created a statefull function component.
+Now our function component should work exactly the same as our class component. Thanks to React’s `useState` hook we've created a statefull function component.
 
 ## Great, it's working but where are those miracles?
 
-You may be thinking that adding **Hooks** to React doesn't bring any spectacular benefits to the table. And actually you're right. If you compare initial class component with it's function counterpart there are not to many differences. It's really  hard to understand why so many people is so excited about hooks.
+You may be thinking that adding **Hooks** to React doesn't bring any spectacular benefits to the table. And actually you're right. If you compare initial class component with its function counterpart there are not too many differences. It's really  hard to understand why so many people is so excited about hooks.
 
-But I promise you one thing. If you stay with me to the end of this series you'll have **Wow! This is so super!** moment. At least I had one.
+I promise you one thing. If you stay with me to the end of this series you'll have a **Wow! This is so super!** moment. At least I had one.
 
-See you in the next part of gentle introduction to React Hooks!
+See you in the next part of the gentle introduction to React Hooks!
