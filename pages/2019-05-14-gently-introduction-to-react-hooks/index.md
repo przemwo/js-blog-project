@@ -13,13 +13,14 @@ W tej serii artykułów odpowiem na następujące pytania:
 - Co to są React Hooks?
 - Po co są React Hooks?
 - Jak używać React Hooks?
-- Czy warto znać React Hooks?
 
-W dalszej części zakładam, że masz podstawową wiedzę na temat React (każdy tutorial trwający więcej niż 5 minut wystarczy) i nie masz żadnej wiedzy na temat React Hooks.
+W dalszej części przyjmuję dwa założenia:
+1. Nie masz żdanej wiedzy na temat React Hooks,
+2. Masz przynajmniej podstawową wiedzę na temat React (każdy tutorial trwający więcej niż 5 minut wystarczy).
 
 ## Moja historia
 
-Pracuję na co dzień z React od przeszło dwóch lat. Muszę przyznać, że Jak dotąd były to dwa bardzo przyjemne lata. Kiedy jednak po raz pierwszy usłyszałem o React Hooks byłem bardzo sceptyczny: "Po co zmieniać coś co jest dobre i działa?" Kiedy zobaczyłem pierwsze przykłady z hookami poczucie "to nie jest dobry kierunek" się wzmogło. Jednak hooki atakowały z każdej strony i kolejne osoby zachwycały się nowym dodatkiem do React. Postanowiłem dać im szansę... i dołączyłem do grona zachwyconych. Ale po kolei.
+Pracuję na co dzień z React od przeszło dwóch lat. Muszę przyznać, że jak dotąd były to dwa bardzo przyjemne lata. Kiedy jednak po raz pierwszy usłyszałem o React Hooks byłem bardzo sceptyczny: "Po co zmieniać coś co jest dobre i działa?" Kiedy zobaczyłem pierwsze przykłady z hookami poczucie "to nie jest dobry kierunek" się wzmogło. Jednak hooki atakowały z każdej strony i kolejne osoby zachwycały się nowym dodatkiem do React. Postanowiłem dać im szansę... i dołączyłem do grona zachwyconych. Ale po kolei.
 
 ## Co to są React Hooks?
 
@@ -48,20 +49,20 @@ Komponenty napisane za pomocą klas mają dwie ważne cechy (funkcjonalności) j
 2. Dają dostęp do **metod cyklu życia** (lifecycle methods) komponentu. 
 
 **Co to jest stan komponentu?**
-Ja rozumiem to jako zdolność komponentu do “zapamiętania” dowolnej informacji o sobie samym.
+Jest to zdolność komponentu do “zapamiętania” dowolnej informacji o sobie samym.
 
 Np. komponent tworzący przycisk może pamiętać czy użytkownik już go wcisnął czy jeszcze nie. I w zależności od odpowiedzi na to pytanie przycisk może być np. zielony lub czerwony.
 
 **Co to są metody cyklu życia komponentu?**
 Cykl życia komponentu to czas od momentu namalowania go w przeglądarce (a nawet chwilę przed tym), tak że użytkownik go widzi i może z niego korzystać aż do czasu jego usunięcia (komponent znika z oczu użytkownika). Metody cyklu życia pozwalają na wykonanie dowolnego kodu w kluczowych momentach “życia” komponentu.
 
-Np. chcemy znać wysokość jaką ma wyrenderowany przez nasz komponent przycisk. Ta wiedza jest dostępna dopiero po faktycznym namalowaniu przycisku w przeglądarce. Dzięki metodzie `componentDidMount` mamy możliwość zmierzyć wysokość przycisku w momencie gdy ten będzie już wyrenderowany.
+Np. chcemy znać wysokość jaką ma namalowany (wyrenderowany) przycisk. Ta wiedza jest dostępna dopiero po faktycznym wyrenderowaniu przycisku w przeglądarce. Dzięki metodzie `componentDidMount` mamy możliwość zmierzyć wysokość przycisku w momencie gdy ten będzie już wyrenderowany.
 
 Komponenty napisane za pomocą funkcji nie dawały nam tych możliwości. Napisałem w czasie przeszłym bo… od wersji React 16.8 obie te funkcjonalności są już dostępne w komponentach funkcyjnych dzięki React Hooks!
 
 ## Pokaż mi kod!
 
-Naszą przygodę z React Hooks zacznijmy od przepisania prostego komponentu klasowego na funkcyjny.
+Naszą przygodę z React Hooks zacznijmy napisania prostego komponentu klasowego.
 
 Poniżej mamy komponent, który renderuje pole input. Użytkownik może wpisać w nim swoje imię, które będzie zapisane w stanie i zostanie wyświetlone powyżej inputa:
 
@@ -92,12 +93,23 @@ class MyComponent extends React.Component {
 }
 ````
 
-Stwórzmy komponentu funkcyjny, który robi to samo. Zacznijmy od przekopiowania całego kodu. Następnie zróbmy kilka zmian:
-1. W komponencie funkcyjnym nie ma słowa kluczowego `this`. Usuńmy je.
-2. Faktycznie interesuje nas nie `state.userName` a samo `userName`. Słowo `state` również znika.
-3. Nie definiujemy `state`. Deklarujemy za to zmienną `userName` i przypisujemy jej wartość `"Bob"`.
-4. Zmieniamy `setState` na funkcję `setUserName`.
-5. Dodajemy `const` przed `handleUserNameChanged` jako, że teraz będzie to zmienna lokalna.
+Napiszmy teraz komponentu funkcyjny, który robi dokładnie to samo. Zacznijmy od stworzenia pustej funkcji:
+
+````jsx
+import React from 'react';
+
+const MyComponent = () => {};
+````
+
+Następnie przekopiujmy kluczowe elementy kodu z komponentu klasowego:
+1. Kopiujemy kod zwracany przez metodę `render()`, który będzie bezpośrednio zwracany przez nasz komponent funkcyjny.
+2. Kopiujemy `handleUserNameChanged()` i wstawiamy słowo kluczowe `const` przed nazwą funkcji.
+3. W komponencie funkcyjnym nie ma słowa kluczowego `this`. Usuwamy wszystkie jego wystąpienia.
+4. Faktycznie interesuje nas nie `state.userName` a samo `userName`. Wszystkie wystąpienia `state` również usuwamy.
+5. Nie definiujemy `state` jako obiektu. Deklarujemy za to zmienną `userName` i przypisujemy jej wartość początkową `"Bob"`.
+6. Zmieniamy `setState` na funkcję o bardziej opisowej nazwie: `setUserName`. Funkcja ta będzie odpowiedzialna za zmianę wartości zmiennej `userName`.
+
+Po zmianach nasz komponent wygląda następująco:
 
 ````jsx
 import React from 'react';
@@ -122,8 +134,16 @@ const MyComponent = () => {
 }
 ````
 
-Na tym etapie nasz komponent nie działa. Nie wie czym jest `setUserName`.
-Zastanówmy się zatem czym jest (a właściwie czym powinno być) `setUserName`. Ma to być **funkcja** zmieniająca wartość zmiennej `userName`. Dodajmy więc naszą naiwną implementację tej funkcji.
+Na tym etapie nasz komponent nie działa. Dostajemy informację o błędzie, że `setUserName` nie jest zdefiniowany.
+Przypomnijmy sobie czym jest (a właściwie czym powinien być) `setUserName`? Ma to być **funkcja** zmieniająca wartość zmiennej `userName`.
+
+Napiszmy naiwną implementację tej funkcji. Niech ta funkcja przyjumje nową wartość `userName` ale (na razie) niech zwraca bieżącą:
+
+````jsx
+const setUserName = (newUserName) => userName;
+````
+
+Dodajmy tę funkcję do naszego komponentu:
 
 ````jsx
 import React from 'react';
@@ -148,15 +168,17 @@ const MyComponent = () => {
 }
 ````
 
-Nasz komponent prawie działa. Prawie bo wyświetla input oraz imię użytkownika. Nie można jednak zmienić nazwy użytkownika. Dlaczego? Brakuje nam **stanu** w komponencie. Chcielibyśmy tutaj **użyć stanu**. Tak się składa, że React daje nam do dyspozycji hook o nazwie `useState`.
+Nasz komponent prawie działa. Prawie bo wyświetla input oraz imię użytkownika "Bob" ale nie można zmienić tej nazwy. Dlaczego? Brakuje nam **stanu** w komponencie, w którym przechowywalibyśmy nową nazwę użytkownika. Chcielibyśmy zatem tutaj **użyć stanu**. Tak się składa, że React daje nam do dyspozycji hook o nazwie `useState`.
 
 ## useState hook
 
-`useState` to funkcja, która po wywołaniu zwraca tablicę zawierającą dwa elementy.
+`useState` to hook, który pozwala nam na używaniu stanu w komponencie funkcyjnym.
+
+`useState` jest to funkcja, która po wywołaniu zwraca tablicę zawierającą dwa elementy:
 1. Pierwszy element to zmienna w której przechowujemy wartość jaką chcemy trzymać w stanie.
-2. Drugi to funkcja za pomocą której możemy zmienić wartość tej zmiennej (stanu).
+2. Drugi to funkcja za pomocą której możemy zmienić wartość tej zmiennej (zmienić stan).
    
-`useState` może przyjąć jako argument dowolną wartość początkową jaką chcemy przypisać do stanu. Może to być `string`, `boolean`, `tablica` czy `obiekt`.
+`useState` może przyjąć jako argument dowolną wartość początkową jaką chcemy przypisać do stanu. Może to być `string`, `boolean`, `tablica` czy `obiekt`. W naszym przykładzie będzie to `string` "Bob".
 
 Zapiszmy zatem:
 
@@ -166,7 +188,7 @@ const userName = state[0];
 const setUserName = state[1];
 ````
 
-Dzięki `destructuring` tablicy możemy ten kod jeszcze uprościć:
+Dzięki `destructuring` tablicy możemy ten kod zapisać bardziej elegancko:
 
 ````javascript
 const [userName, setUserName] = useState("Bob");
@@ -202,7 +224,7 @@ const MyComponent = () => {
 }
 ````
 
-W ten sposób stworzyliśmy w pełni działający komponent funkcyjny, który korzysta ze stanu.
+W tym momencie nasz komponent powinien działać dokładnie tak samo jak nasz początkowy komponent klasowy. Stworzyliśmy w pełni działający komponent funkcyjny, który korzysta ze stanu dzięki użyciu hooka `useState`.
 
 ## No fajnie, działa ale gdzie te obiecane cuda?
 
