@@ -180,11 +180,11 @@ Nasz komponent prawie działa. Prawie bo wyświetla input oraz imię użytkownik
 1. Pierwszy element to zmienna w której przechowujemy wartość jaką chcemy trzymać w stanie.
 2. Drugi to funkcja za pomocą której możemy zmienić wartość tej zmiennej (zmienić stan).
    
-`useState` może przyjąć jako argument dowolną wartość początkową jaką chcemy przypisać do stanu. Może to być `string`, `boolean`, `tablica` czy `obiekt`. W naszym przykładzie będzie to `string` "Bob".
+`useState` może przyjąć jako argument dowolną wartość początkową jaką chcemy przypisać do stanu. Może to być `string`, `liczba`, `boolean`, `tablica` czy `obiekt`. W naszym przykładzie będzie to `string` "Bob".
 
 Zapiszmy zatem:
 
-````javascript
+````jsx
 const state = useState("Bob");
 const userName = state[0];
 const setUserName = state[1];
@@ -192,7 +192,7 @@ const setUserName = state[1];
 
 Dzięki `destructuring` tablicy możemy ten kod zapisać bardziej elegancko:
 
-````javascript
+````jsx
 const [userName, setUserName] = useState("Bob");
 ````
 
