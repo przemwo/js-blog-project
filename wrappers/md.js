@@ -21,19 +21,20 @@ class MarkdownWrapper extends React.Component {
           title={`${post.title} | ${config.blogTitle}`}
         />
         <h1 style={{marginTop: 0}}>{post.title}</h1>
+        <div style={{ marginTop: "-2em" }}>
+          <em
+            style={{
+              display: 'block',
+              marginBottom: rhythm(1),
+            }}
+          >
+            Posted {moment(post.date).format('MMMM D, YYYY')}
+          </em>
+        </div>
         <div dangerouslySetInnerHTML={{ __html: post.body }} />
         {(route.page.data.title !== "About me and this blog") &&
           <div>
-            <em
-              style={{
-                display: 'block',
-                marginBottom: rhythm(1),
-              }}
-              >
-              Posted {moment(post.date).format('MMMM D, YYYY')}
-            </em>
             {links && links.length > 0 && <Links links={links} />}
-            <p>Found a mistake? Please let me know and <a href="mailto:przemwo@o2.pl">email me</a>. Thanks!</p>
             <hr
               style={{
                 marginBottom: rhythm(2),

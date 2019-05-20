@@ -27,20 +27,7 @@ class Bio extends React.Component {
           }}
         />
       Hi! My name is <strong>{config.authorName}</strong>. I&apos;m a frontend developer who lives and works in Gdańsk, Poland.
-      You can read more about me and this blog
-      {' '}
-      <Link
-        style={{
-          boxShadow: 'none',
-          textDecoration: 'underline',
-        }}
-        to={prefixLink('/about/')}
-        >
-        here
-      </Link>
-      {' '}
-      or visit my <a href="https://github.com/przemwo">GitHub profile</a> to see what I&apos;m doing right now.
-
+      You can visit my <a href="https://github.com/przemwo">GitHub profile</a> to see what I&apos;m doing right now. <a href="https://twitter.com/PrzemekWolnik">You can also follow me on Twitter</a>.
       </p>
     )
   }
