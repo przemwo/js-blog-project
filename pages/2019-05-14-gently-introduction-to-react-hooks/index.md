@@ -8,7 +8,7 @@ links: ""
 description: If you want to learn React Hooks in a gently way you are in a good place.
 ---
 
-In these series of articles I'm going to answer following quesitons:
+In these series of articles I'm going to answer following questions:
 - What are React hooks?
 - Why there are React hooks?
 - How to use React hooks?
@@ -25,7 +25,7 @@ I've been working with React for over two years now. I must admit it's been very
 
 Hooks were introduced to React to replace class creation of components. Replace with what? Replace with function creation.
 
-'Whoa!' one can shout. We could have created componenets with functions this whole time. What the whole fuss with hooks is about? Before I answer this question let us take two steps back.
+'Whoa!' one can shout. We could have created components with functions this whole time. What the whole fuss with hooks is about? Before I answer this question let us take two steps back.
 
 ## How do we create components in React?
 
@@ -52,7 +52,7 @@ Class components have two important features not available for function componen
 
 E.g. a button component can remember whether user clicked it or not. And depending on that render itself in green or red.
 
-**What are component's lifecycle methods?** Component's lifecycle is a period starting with the first painting of a component in a browser (and even one moment before) up unitl removing it from there. Lifecycle methods let us execute any code in key moments of component's existance.
+**What are component's lifecycle methods?** Component's lifecycle is a period starting with the first painting of a component in a browser (and even one moment before) up until removing it from there. Lifecycle methods let us execute any code in key moments of component's existance.
 
 E.g. let’s say we'd like to know the height of the button. This information is available after the button is actually rendered in the browser.Thanks to `componentDidMount` we can have access to the button and get its height when it's rendered.
 
@@ -97,6 +97,7 @@ Let's write a function component now. The goal is to write a component that has 
 import React from 'react';
 
 const MyComponent = () => {
+    // code goes here
 };
 ````
 
