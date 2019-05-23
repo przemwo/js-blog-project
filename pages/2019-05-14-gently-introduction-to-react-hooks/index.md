@@ -183,7 +183,7 @@ We can write:
 
 ````jsx{numberLines: true}
 const state = useState("Bob"); // state is an array
-const userName = state[0]; // first element is a state
+const userName = state[0]; // first element is a state's value
 const setUserName = state[1]; // second element is a function 
 ````
 
