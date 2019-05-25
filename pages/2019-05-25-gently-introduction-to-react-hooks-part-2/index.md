@@ -44,7 +44,7 @@ class MyComponent extends React.Component {
     //create new reference
     inputRef = React.createRef();
 
-    //code in the componentDidMount will be executed after the component has been rendered
+    //use componentDidMount
     componentDidMount() {
         //using the reference to the input field we select the text in it
         this.inputRef.current.select();
@@ -73,7 +73,7 @@ The class component works as expected.
 
 It's time to rewrite it into a functional component. Let's start where we finished in the [previous part](http://frontendnotes.net/gently-introduction-to-react-hooks-part-1/).
 
-Grab the final example of the functional component. Next copy the new elements from the class component. Dont' forget to remove references to `this` and add the missing` const`.
+Grab the final example of the functional component. Next copy the new elements from the class component. Dont' forget to remove references to `this` and add the missing `const`.
 
 Our functional component at this stage should look like this:
 
@@ -146,7 +146,7 @@ const MyComponent = () => {
 }
 ```
 
-In our example, the use of `useRef` will have the same result as using `createRef`. These two methods, however, differ from each other. If you are interested in what the difference is, I recommend reading [this] (https://stackoverflow.com/a/54620836).
+In our example, the use of `useRef` will have the same result as using `createRef`. These two methods, however, differ from each other. If you are interested in what the difference is, I recommend reading [this](https://stackoverflow.com/a/54620836).
 
 Ok, but our example is still broken.
 
