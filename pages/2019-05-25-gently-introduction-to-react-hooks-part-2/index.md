@@ -10,9 +10,9 @@ description: If you want to learn React Hooks in a gently way you are in a good 
 
 This is the second part of the series **Gently introduction to React Hooks**. I encourage you to read the first part if you haven't already done so:
 
-- [Gently introduction to React Hooks. Part 1](https://dev.to/przemwo/gently-introduction-to-react-hooks-part-1-1a47)
+- [Gently introduction to React Hooks. Part 1](http://frontendnotes.net/gently-introduction-to-react-hooks-part-1/)
 
-Let's start exactly where we left. Our component works. The user can enter his name in the input field. Let's add new functionality to it.
+Let's start exactly where we left. Our component works. The user can enter his name in the input field. Let's add new functionality to it!
 
 We want the text in the input field (user name "Bob") to be automatically selected after the component is rendered. Thanks to this, the user will be able to easily and conveniently change the value of this field without the need to use the mouse.
 
@@ -21,13 +21,13 @@ First of all, our component (which contains the input field) must be actually re
 
 ## Let's write some code
 
-We'll with the start as before from the class component. Later, we will transform it into a functional component that will use **React Hooks**.
+We'll start as before from the class component. Later, we will transform it into a functional component that will use **React Hooks**.
 
 To access the rendered component (including our input field), we must use the `componentDidMount` lifecycle method.
 In addition, in order to actually "catch" this input field, we must create a reference to it and store it in a variable. This will be provided by the `createRef` method.
 Finally, having reference to the rendered input field, we will use the `select` method, which will select the text.
 
-I marked new elements in the code.
+I marked new elements in the code:
 
 ```jsx
 import React from 'react';
@@ -69,8 +69,11 @@ class MyComponent extends React.Component {
 }
 ```
 
-It's time to rewrite the class component into a functional one. Let's start where we finished in the [previous part] (https://dev.to/przemwo/gently-introduction-to-react-hooks-part-1-1a47).
-Next copy the new elements from the class component and remove references to `this` and add the missing` const`.
+The class component works as expected.
+
+It's time to rewrite it into a functional component. Let's start where we finished in the [previous part](http://frontendnotes.net/gently-introduction-to-react-hooks-part-1/).
+
+Grab the final example of the functional component. Next copy the new elements from the class component. Dont' forget to remove references to `this` and add the missing` const`.
 
 Our functional component at this stage should look like this:
 
@@ -107,6 +110,8 @@ const MyComponent = () => {
 }
 ```
 
+Our code is not working. There is a problem with `componentDidMount`. But before we fix that let's take a look at `createRef`.
+
 In the function component, like in the class one, if you want to use the reference to the rendered element, you can use `createRef`. However, React provides us with a special hook when we want to use the reference. It's called `useRef`. Let's use it in our example.
 
 ```jsx
@@ -141,9 +146,11 @@ const MyComponent = () => {
 }
 ```
 
-In our example, the use of `useRef` will have the same result as using `createRef`. These two methods, however, differ from each other. If you are interested in what the difference is, I recommend reading [this] (https://stackoverflow.com/a/54620836) text.
+In our example, the use of `useRef` will have the same result as using `createRef`. These two methods, however, differ from each other. If you are interested in what the difference is, I recommend reading [this] (https://stackoverflow.com/a/54620836).
 
-## And what about `componentDidMount`?
+Ok, but our example is still broken.
+
+## What about `componentDidMount`?
 
 There is no `componentDidMount` method in function components. So how can we get to the already rendered component? We need to use another hook: `useEffect`.
 
@@ -199,7 +206,7 @@ Our component works. Well, almost. "Almost" because it selects the text in the i
 
 As I wrote before, the function passed to `useEffect` is executed after each render. When user enters a new character in the input field, the new value of `userName` is saved to the state, which in turn causes next render of the component. Then function passed to `useEffect` is executed again and the text in the input field is selected. We have to fix it!
 
-`useEffect` can accept an array as a second parameter. Elements of this array are variables. Our effect depends on these variables. After each render, React checks whether one of these variables has changed and runs the the effect.
+`useEffect` can accept an array as a second parameter. Elements of this array can be any number of variables. **After each render**, React checks whether one of these variables has changed. If so the effect runs.
 
 ```jsx
 useEffect(() => {
@@ -207,7 +214,20 @@ useEffect(() => {
 }, [/* list of dependencies */]);
 ```
 
-In our case, we want the effect (selecting text in the input field) to run once (just after the first renderer), and then remain insensitive to further changes in our component. Whatever changes in our component (eg the user enters a new name) the effect should not run anymore. So we want the dependency array to be empty. Let's write it!
+Eg. if we want to depend our effect on `userName` changes we can write this:
+
+```jsx
+useEffect(() => {
+    console.log('User name has changed!');
+}, [userName]);
+```
+We can read this as follows:
+1. We want to use effect.
+2. This effect is writing text to the console.
+3. We want this effect to run after first render.
+4. After every next render if `userName` is changed we want to run the effect again.
+
+In our case, we want the effect (selecting text in the input field) to run once (just after the first render), and then remain insensitive to further changes in our component. Whatever changes in our component (eg the user enters a new name) the effect should not run anymore. So we want the dependency array to be empty. Let's write it!
 
 ```jsx
 useEffect(() => {
@@ -257,6 +277,6 @@ We have it! Our component works as we wished. We have rewritten a class componen
 
 ## But I still do not understand these delights
 
-I understand you perfectly. I had the same myself. What's all this fuss about React Hooks about? Why learn a new syntax since the result is exactly the same as before?
+I understand you perfectly. I had the same myself. What's all this fuss about React Hooks? Why learn a new syntax since the result is exactly the same as before?
 
-However, if you stay with me in the next part of **Gently intorduction to React Hooks** you should have the first moment: "Ok, that's cool."
+However, if you stay with me in the next part of **Gently intorduction to React Hooks** you should have the first "Ok, that's cool" moment.
